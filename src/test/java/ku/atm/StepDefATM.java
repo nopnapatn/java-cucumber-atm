@@ -1,11 +1,16 @@
+// 6410450133 nopnapat norasri
+
 package ku.atm;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class StepDefATM {
 
@@ -54,6 +59,7 @@ public class StepDefATM {
         assertThrows(NotEnoughBalanceException.class,
                 () -> atm.withdraw(amount));
     }
+
     @Then("my account balance is {float}")
     public void my_account_balance_is(double balance) {
         assertEquals(balance, atm.getBalance());
@@ -67,7 +73,12 @@ public class StepDefATM {
     @Then("customer id {int} account balance is {float}")
     public void customer_id_account_balance_is(int id, double balance) {
         assertEquals(balance,
-                     bank.getCustomer(id).getAccount().getBalance());
+                bank.getCustomer(id).getAccount().getBalance());
     }
 
+    // method for deposit into ATM
+    @When("I deposit {float} into ATM")
+    public void Deposit(double amount) {
+        atm.deposit(amount);
+    }
 }
